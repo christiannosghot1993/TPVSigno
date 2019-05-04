@@ -42,7 +42,7 @@
         <ext:FormPanel
             ID="FormPanel1"
             runat="server"
-            Title="INGRESO DE CLIENTES 2"
+            Title="INGRESO DE CLIENTES "
             Width="1150"
             BodyPadding="10"
             DefaultAnchor="100%">

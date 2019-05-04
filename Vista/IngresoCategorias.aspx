@@ -10,7 +10,7 @@
             font-weight: bold;
             font-size: 20px;
         }
-
+        z
         .note .x-form-item {
             margin-bottom: 0px;
         }
@@ -43,7 +43,7 @@
     <ext:FormPanel
         ID="FormPanel1"
         runat="server"
-        Title="INGRESO DE CATEGORÍAS asd"
+        Title="INGRESO DE CATEGORÍAS"
         Width="1150"
         BodyPadding="10"
         DefaultAnchor="100%">
