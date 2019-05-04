@@ -1,0 +1,742 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TpvSignoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Arbol">
+          <Key>
+            <PropertyRef Name="arb_id" />
+          </Key>
+          <Property Name="arb_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="arb_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="arb_nombre" Type="varchar" MaxLength="50" />
+          <Property Name="arb_estado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Clientes">
+          <Key>
+            <PropertyRef Name="cli_id" />
+          </Key>
+          <Property Name="cli_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cli_cedula_ruc" Type="varchar" MaxLength="50" />
+          <Property Name="cli_nombres" Type="varchar" MaxLength="500" />
+          <Property Name="cli_apellidos" Type="varchar" MaxLength="500" />
+          <Property Name="cli_direccion" Type="varchar" MaxLength="500" />
+          <Property Name="cli_telefono" Type="varchar" MaxLength="50" />
+          <Property Name="cli_correo" Type="varchar" MaxLength="500" />
+          <Property Name="cli_estado" Type="varchar" MaxLength="50" />
+          <Property Name="cli_usuario" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Empresa">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emp_ruc" Type="varchar" MaxLength="50" />
+          <Property Name="emp_razon_social" Type="varchar" MaxLength="50" />
+          <Property Name="emp_nombre_comercial" Type="varchar" MaxLength="50" />
+          <Property Name="emp_obligada_contabilidad" Type="bit" />
+          <Property Name="emp_contribuyente_especial" Type="varchar" MaxLength="50" />
+          <Property Name="emp_numero_establecimiento" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Factura_Cabecera">
+          <Key>
+            <PropertyRef Name="fac_id" />
+          </Key>
+          <Property Name="fac_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fac_numero_serie" Type="varchar" MaxLength="50" />
+          <Property Name="fac_punto_emision" Type="varchar" MaxLength="50" />
+          <Property Name="fac_fecha_emision" Type="datetime" />
+          <Property Name="fac_cli_cedula_ruc" Type="varchar" MaxLength="50" />
+          <Property Name="fac_cli_nombres" Type="varchar" MaxLength="50" />
+          <Property Name="fac_cli_apellidos" Type="varchar" MaxLength="50" />
+          <Property Name="fac_total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="fac_descuento" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="fac_total_impuestos" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="fac_forma_pago_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="fac_usuario" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Factura_Detalle">
+          <Key>
+            <PropertyRef Name="fad_id" />
+          </Key>
+          <Property Name="fad_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fad_fac_id" Type="int" />
+          <Property Name="fad_fac_numero_serie" Type="varchar" MaxLength="50" />
+          <Property Name="fad_pro_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="fad_pro_descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="fad_pro_cantidad" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="fad_pro_precio_venta" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="fad_pro_descuento" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="fac_pro_impuesto" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tbl_Familias">
+          <Key>
+            <PropertyRef Name="fam_id" />
+          </Key>
+          <Property Name="fam_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fam_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fam_estado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fam_usuario" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Nodo">
+          <Key>
+            <PropertyRef Name="nod_id" />
+          </Key>
+          <Property Name="nod_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nod_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="nod_nombre" Type="varchar" MaxLength="50" />
+          <Property Name="nod_arb_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="nod_estado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Privilegios">
+          <Key>
+            <PropertyRef Name="pri_id" />
+          </Key>
+          <Property Name="pri_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pri_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="pri_rol_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="pri_nod_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="pri_estado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Productos">
+          <Key>
+            <PropertyRef Name="pro_id" />
+          </Key>
+          <Property Name="pro_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pro_codigo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pro_descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="pro_stock_actual" Type="int" />
+          <Property Name="pro_stock_minimo" Type="int" />
+          <Property Name="pro_coste" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="pro_precio_venta" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="pro_imagen" Type="image" />
+          <Property Name="pro_estado" Type="varchar" MaxLength="50" />
+          <Property Name="pro_prv_id" Type="int" />
+          <Property Name="pro_fam_id" Type="int" />
+          <Property Name="pro_imagen_path" Type="varchar" MaxLength="500" />
+          <Property Name="pro_impuesto" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="pro_codigo_barras" Type="varchar" MaxLength="50" />
+          <Property Name="pro_usuario" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Proveedores">
+          <Key>
+            <PropertyRef Name="prv_id" />
+          </Key>
+          <Property Name="prv_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prv_ruc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prv_razon_social" Type="varchar" MaxLength="50" />
+          <Property Name="prv_email" Type="varchar" MaxLength="50" />
+          <Property Name="prv_direccion" Type="varchar" MaxLength="50" />
+          <Property Name="prv_telefono" Type="varchar" MaxLength="50" />
+          <Property Name="prv_pagina_web" Type="varchar" MaxLength="50" />
+          <Property Name="prv_estado" Type="varchar" MaxLength="50" />
+          <Property Name="prv_usuario" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Punto_Emision">
+          <Key>
+            <PropertyRef Name="pem_id" />
+          </Key>
+          <Property Name="pem_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pem_emp_id" Type="int" />
+          <Property Name="pem_direccion_ip" Type="varchar" MaxLength="50" />
+          <Property Name="pem_punto_emision" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Roles">
+          <Key>
+            <PropertyRef Name="rol_id" />
+          </Key>
+          <Property Name="rol_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rol_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="rol_descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="rol_estado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Usuarios">
+          <Key>
+            <PropertyRef Name="usu_id" />
+          </Key>
+          <Property Name="usu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usu_nombre_usuario" Type="varchar" MaxLength="50" />
+          <Property Name="usu_contrasena" Type="varchar" MaxLength="50" />
+          <Property Name="usu_rol_codigo" Type="varchar" MaxLength="50" />
+          <Property Name="usu_estado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TpvSigno.ts.vta_Punto_Emision' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vta_Punto_Emision">
+          <Key>
+            <PropertyRef Name="pem_id" />
+          </Key>
+          <Property Name="pem_id" Type="int" Nullable="false" />
+          <Property Name="pem_emp_id" Type="varchar" MaxLength="50" />
+          <Property Name="pem_direccion_ip" Type="varchar" MaxLength="50" />
+          <Property Name="pem_punto_emision" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Factura_Cabecera_Factura_Detalle">
+          <End Role="tbl_Factura_Cabecera" Type="Self.tbl_Factura_Cabecera" Multiplicity="0..1" />
+          <End Role="tbl_Factura_Detalle" Type="Self.tbl_Factura_Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Factura_Cabecera">
+              <PropertyRef Name="fac_id" />
+            </Principal>
+            <Dependent Role="tbl_Factura_Detalle">
+              <PropertyRef Name="fad_fac_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Empresa_tbl_Punto_Emision">
+          <End Role="tbl_Empresa" Type="Self.tbl_Empresa" Multiplicity="0..1" />
+          <End Role="tbl_Punto_Emision" Type="Self.tbl_Punto_Emision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Empresa">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tbl_Punto_Emision">
+              <PropertyRef Name="pem_emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_tbl_Nodo_tbl_Arbol' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_tbl_Nodo_tbl_Arbol" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_tbl_Privilegios_tbl_Nodo' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_tbl_Privilegios_tbl_Nodo" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_tbl_Privilegios_tbl_Roles' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_tbl_Privilegios_tbl_Roles" />-->
+        <Association Name="FK_tbl_Productos_tbl_Familias">
+          <End Role="tbl_Familias" Type="Self.tbl_Familias" Multiplicity="0..1" />
+          <End Role="tbl_Productos" Type="Self.tbl_Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Familias">
+              <PropertyRef Name="fam_id" />
+            </Principal>
+            <Dependent Role="tbl_Productos">
+              <PropertyRef Name="pro_fam_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Productos_tbl_Proveedores">
+          <End Role="tbl_Proveedores" Type="Self.tbl_Proveedores" Multiplicity="0..1" />
+          <End Role="tbl_Productos" Type="Self.tbl_Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Proveedores">
+              <PropertyRef Name="prv_id" />
+            </Principal>
+            <Dependent Role="tbl_Productos">
+              <PropertyRef Name="pro_prv_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_tbl_Usuarios_tbl_Roles' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_tbl_Usuarios_tbl_Roles" />-->
+        <EntityContainer Name="TpvSignoModelStoreContainer">
+          <EntitySet Name="tbl_Arbol" EntityType="Self.tbl_Arbol" Schema="ts" store:Type="Tables" />
+          <EntitySet Name="tbl_Clientes" EntityType="Self.tbl_Clientes" Schema="ts" store:Type="Tables" />
+          <EntitySet Name="tbl_Empresa" EntityType="Self.tbl_Empresa" Schema="ts" store:Type="Tables" />
+          <EntitySet Name="tbl_Factura_Cabecera" EntityType="Self.tbl_Factura_Cabecera" Schema="ts" store:Type="Tables" />
+          <EntitySet Name="tbl_Factura_Detalle" EntityType="Self.tbl_Factura_Detalle" Schema="ts" store:Type="Tables" />
+          <EntitySet Name="tbl_Familias" EntityType="Self.tbl_Familias" Schema="ts" store:Type="Tables" />
+          <EntitySet Name="tbl_Nodo" EntityType="Self.tbl_Nodo" Schema="ts" store:Type="Tables" />
+          <EntitySet Name="tbl_Privilegios" EntityType="Self.tbl_Privilegios" Schema="ts" store:Type="Tables" />
+          <EntitySet Name="tbl_Productos" EntityType="Self.tbl_Productos" Schema="ts" store:Type="Tables" />
+          <EntitySet Name="tbl_Proveedores" EntityType="Self.tbl_Proveedores" Schema="ts" store:Type="Tables" />
+          <EntitySet Name="tbl_Punto_Emision" EntityType="Self.tbl_Punto_Emision" Schema="ts" store:Type="Tables" />
+          <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" Schema="ts" store:Type="Tables" />
+          <EntitySet Name="tbl_Usuarios" EntityType="Self.tbl_Usuarios" Schema="ts" store:Type="Tables" />
+          <EntitySet Name="vta_Punto_Emision" EntityType="Self.vta_Punto_Emision" store:Type="Views" store:Schema="ts">
+            <DefiningQuery>SELECT 
+    [vta_Punto_Emision].[pem_id] AS [pem_id], 
+    [vta_Punto_Emision].[pem_emp_id] AS [pem_emp_id], 
+    [vta_Punto_Emision].[pem_direccion_ip] AS [pem_direccion_ip], 
+    [vta_Punto_Emision].[pem_punto_emision] AS [pem_punto_emision]
+    FROM [ts].[vta_Punto_Emision] AS [vta_Punto_Emision]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Factura_Cabecera_Factura_Detalle" Association="Self.FK_Factura_Cabecera_Factura_Detalle">
+            <End Role="tbl_Factura_Cabecera" EntitySet="tbl_Factura_Cabecera" />
+            <End Role="tbl_Factura_Detalle" EntitySet="tbl_Factura_Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Empresa_tbl_Punto_Emision" Association="Self.FK_tbl_Empresa_tbl_Punto_Emision">
+            <End Role="tbl_Empresa" EntitySet="tbl_Empresa" />
+            <End Role="tbl_Punto_Emision" EntitySet="tbl_Punto_Emision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Productos_tbl_Familias" Association="Self.FK_tbl_Productos_tbl_Familias">
+            <End Role="tbl_Familias" EntitySet="tbl_Familias" />
+            <End Role="tbl_Productos" EntitySet="tbl_Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Productos_tbl_Proveedores" Association="Self.FK_tbl_Productos_tbl_Proveedores">
+            <End Role="tbl_Proveedores" EntitySet="tbl_Proveedores" />
+            <End Role="tbl_Productos" EntitySet="tbl_Productos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TpvSignoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TpvSignoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Factura_Detalle" EntityType="TpvSignoModel.tbl_Factura_Detalle" />
+          <EntitySet Name="tbl_Arbol" EntityType="TpvSignoModel.tbl_Arbol" />
+          <EntitySet Name="tbl_Nodo" EntityType="TpvSignoModel.tbl_Nodo" />
+          <EntitySet Name="tbl_Privilegios" EntityType="TpvSignoModel.tbl_Privilegios" />
+          <EntitySet Name="tbl_Roles" EntityType="TpvSignoModel.tbl_Roles" />
+          <EntitySet Name="tbl_Usuarios" EntityType="TpvSignoModel.tbl_Usuarios" />
+          <EntitySet Name="tbl_Productos" EntityType="TpvSignoModel.tbl_Productos" />
+          <EntitySet Name="tbl_Familias" EntityType="TpvSignoModel.tbl_Familias" />
+          <AssociationSet Name="FK_tbl_Productos_tbl_Familias" Association="TpvSignoModel.FK_tbl_Productos_tbl_Familias">
+            <End Role="tbl_Familias" EntitySet="tbl_Familias" />
+            <End Role="tbl_Productos" EntitySet="tbl_Productos" />
+          </AssociationSet>
+          <EntitySet Name="tbl_Clientes" EntityType="TpvSignoModel.tbl_Clientes" />
+          <EntitySet Name="tbl_Proveedores" EntityType="TpvSignoModel.tbl_Proveedores" />
+          <AssociationSet Name="FK_tbl_Productos_tbl_Proveedores" Association="TpvSignoModel.FK_tbl_Productos_tbl_Proveedores">
+            <End Role="tbl_Proveedores" EntitySet="tbl_Proveedores" />
+            <End Role="tbl_Productos" EntitySet="tbl_Productos" />
+          </AssociationSet>
+          <EntitySet Name="tbl_Empresa" EntityType="TpvSignoModel.tbl_Empresa" />
+          <EntitySet Name="vta_Punto_Emision" EntityType="TpvSignoModel.vta_Punto_Emision" />
+          <EntitySet Name="tbl_Punto_Emision" EntityType="TpvSignoModel.tbl_Punto_Emision" />
+          <AssociationSet Name="FK_tbl_Empresa_tbl_Punto_Emision" Association="TpvSignoModel.FK_tbl_Empresa_tbl_Punto_Emision">
+            <End Role="tbl_Empresa" EntitySet="tbl_Empresa" />
+            <End Role="tbl_Punto_Emision" EntitySet="tbl_Punto_Emision" />
+          </AssociationSet>
+          <EntitySet Name="tbl_Factura_Cabecera" EntityType="TpvSignoModel.tbl_Factura_Cabecera" />
+          <AssociationSet Name="FK_Factura_Cabecera_Factura_Detalle" Association="TpvSignoModel.FK_Factura_Cabecera_Factura_Detalle">
+            <End Role="tbl_Factura_Cabecera" EntitySet="tbl_Factura_Cabecera" />
+            <End Role="tbl_Factura_Detalle" EntitySet="tbl_Factura_Detalle" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="tbl_Factura_Detalle">
+          <Key>
+            <PropertyRef Name="fad_id" />
+          </Key>
+          <Property Name="fad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fad_fac_id" Type="Int32" />
+          <Property Name="fad_fac_numero_serie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fad_pro_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fad_pro_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fad_pro_cantidad" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="fad_pro_precio_venta" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="fad_pro_descuento" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="fac_pro_impuesto" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="tbl_Factura_Cabecera" Relationship="TpvSignoModel.FK_Factura_Cabecera_Factura_Detalle" FromRole="tbl_Factura_Detalle" ToRole="tbl_Factura_Cabecera" />
+        </EntityType>
+        <EntityType Name="tbl_Arbol">
+          <Key>
+            <PropertyRef Name="arb_id" />
+          </Key>
+          <Property Name="arb_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="arb_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="arb_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="arb_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_Nodo">
+          <Key>
+            <PropertyRef Name="nod_id" />
+          </Key>
+          <Property Name="nod_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nod_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nod_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nod_arb_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nod_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_Privilegios">
+          <Key>
+            <PropertyRef Name="pri_id" />
+          </Key>
+          <Property Name="pri_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pri_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pri_rol_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pri_nod_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pri_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_Roles">
+          <Key>
+            <PropertyRef Name="rol_id" />
+          </Key>
+          <Property Name="rol_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rol_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rol_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rol_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_Usuarios">
+          <Key>
+            <PropertyRef Name="usu_id" />
+          </Key>
+          <Property Name="usu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usu_nombre_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="usu_contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="usu_rol_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="usu_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_Productos">
+          <Key>
+            <PropertyRef Name="pro_id" />
+          </Key>
+          <Property Name="pro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pro_codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pro_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pro_stock_actual" Type="Int32" />
+          <Property Name="pro_stock_minimo" Type="Int32" />
+          <Property Name="pro_coste" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="pro_precio_venta" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="pro_imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="pro_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pro_prv_id" Type="Int32" />
+          <Property Name="pro_fam_id" Type="Int32" />
+          <Property Name="pro_imagen_path" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="pro_impuesto" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="pro_codigo_barras" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pro_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Familias" Relationship="TpvSignoModel.FK_tbl_Productos_tbl_Familias" FromRole="tbl_Productos" ToRole="tbl_Familias" />
+          <NavigationProperty Name="tbl_Proveedores" Relationship="TpvSignoModel.FK_tbl_Productos_tbl_Proveedores" FromRole="tbl_Productos" ToRole="tbl_Proveedores" />
+        </EntityType>
+        <EntityType Name="tbl_Familias">
+          <Key>
+            <PropertyRef Name="fam_id" />
+          </Key>
+          <Property Name="fam_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fam_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fam_estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fam_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Productos" Relationship="TpvSignoModel.FK_tbl_Productos_tbl_Familias" FromRole="tbl_Familias" ToRole="tbl_Productos" />
+        </EntityType>
+        <Association Name="FK_tbl_Productos_tbl_Familias">
+          <End Type="TpvSignoModel.tbl_Familias" Role="tbl_Familias" Multiplicity="0..1" />
+          <End Type="TpvSignoModel.tbl_Productos" Role="tbl_Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Familias">
+              <PropertyRef Name="fam_id" />
+            </Principal>
+            <Dependent Role="tbl_Productos">
+              <PropertyRef Name="pro_fam_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbl_Clientes">
+          <Key>
+            <PropertyRef Name="cli_id" />
+          </Key>
+          <Property Name="cli_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cli_cedula_ruc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cli_nombres" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="cli_apellidos" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="cli_direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="cli_telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cli_correo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="cli_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cli_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_Proveedores">
+          <Key>
+            <PropertyRef Name="prv_id" />
+          </Key>
+          <Property Name="prv_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prv_ruc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prv_razon_social" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prv_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prv_direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prv_telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prv_pagina_web" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prv_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prv_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Productos" Relationship="TpvSignoModel.FK_tbl_Productos_tbl_Proveedores" FromRole="tbl_Proveedores" ToRole="tbl_Productos" />
+        </EntityType>
+        <Association Name="FK_tbl_Productos_tbl_Proveedores">
+          <End Type="TpvSignoModel.tbl_Proveedores" Role="tbl_Proveedores" Multiplicity="0..1" />
+          <End Type="TpvSignoModel.tbl_Productos" Role="tbl_Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Proveedores">
+              <PropertyRef Name="prv_id" />
+            </Principal>
+            <Dependent Role="tbl_Productos">
+              <PropertyRef Name="pro_prv_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbl_Empresa">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emp_ruc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="emp_razon_social" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="emp_nombre_comercial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="emp_obligada_contabilidad" Type="Boolean" />
+          <Property Name="emp_contribuyente_especial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="emp_numero_establecimiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Punto_Emision" Relationship="TpvSignoModel.FK_tbl_Empresa_tbl_Punto_Emision" FromRole="tbl_Empresa" ToRole="tbl_Punto_Emision" />
+        </EntityType>
+        <EntityType Name="vta_Punto_Emision">
+          <Key>
+            <PropertyRef Name="pem_id" />
+          </Key>
+          <Property Name="pem_id" Type="Int32" Nullable="false" />
+          <Property Name="pem_emp_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pem_direccion_ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pem_punto_emision" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_Punto_Emision">
+          <Key>
+            <PropertyRef Name="pem_id" />
+          </Key>
+          <Property Name="pem_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pem_emp_id" Type="Int32" />
+          <Property Name="pem_direccion_ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pem_punto_emision" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Empresa" Relationship="TpvSignoModel.FK_tbl_Empresa_tbl_Punto_Emision" FromRole="tbl_Punto_Emision" ToRole="tbl_Empresa" />
+        </EntityType>
+        <Association Name="FK_tbl_Empresa_tbl_Punto_Emision">
+          <End Type="TpvSignoModel.tbl_Empresa" Role="tbl_Empresa" Multiplicity="0..1" />
+          <End Type="TpvSignoModel.tbl_Punto_Emision" Role="tbl_Punto_Emision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Empresa">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="tbl_Punto_Emision">
+              <PropertyRef Name="pem_emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbl_Factura_Cabecera">
+          <Key>
+            <PropertyRef Name="fac_id" />
+          </Key>
+          <Property Name="fac_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fac_numero_serie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fac_punto_emision" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fac_fecha_emision" Type="DateTime" Precision="3" />
+          <Property Name="fac_cli_cedula_ruc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fac_cli_nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fac_cli_apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fac_total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="fac_descuento" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="fac_total_impuestos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="fac_forma_pago_codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fac_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Factura_Detalle" Relationship="TpvSignoModel.FK_Factura_Cabecera_Factura_Detalle" FromRole="tbl_Factura_Cabecera" ToRole="tbl_Factura_Detalle" />
+        </EntityType>
+        <Association Name="FK_Factura_Cabecera_Factura_Detalle">
+          <End Type="TpvSignoModel.tbl_Factura_Cabecera" Role="tbl_Factura_Cabecera" Multiplicity="0..1" />
+          <End Type="TpvSignoModel.tbl_Factura_Detalle" Role="tbl_Factura_Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Factura_Cabecera">
+              <PropertyRef Name="fac_id" />
+            </Principal>
+            <Dependent Role="tbl_Factura_Detalle">
+              <PropertyRef Name="fad_fac_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TpvSignoModelStoreContainer" CdmEntityContainer="TpvSignoEntities">
+          <EntitySetMapping Name="tbl_Factura_Detalle">
+            <EntityTypeMapping TypeName="TpvSignoModel.tbl_Factura_Detalle">
+              <MappingFragment StoreEntitySet="tbl_Factura_Detalle">
+                <ScalarProperty Name="fac_pro_impuesto" ColumnName="fac_pro_impuesto" />
+                <ScalarProperty Name="fad_pro_descuento" ColumnName="fad_pro_descuento" />
+                <ScalarProperty Name="fad_pro_precio_venta" ColumnName="fad_pro_precio_venta" />
+                <ScalarProperty Name="fad_pro_cantidad" ColumnName="fad_pro_cantidad" />
+                <ScalarProperty Name="fad_pro_descripcion" ColumnName="fad_pro_descripcion" />
+                <ScalarProperty Name="fad_pro_codigo" ColumnName="fad_pro_codigo" />
+                <ScalarProperty Name="fad_fac_numero_serie" ColumnName="fad_fac_numero_serie" />
+                <ScalarProperty Name="fad_fac_id" ColumnName="fad_fac_id" />
+                <ScalarProperty Name="fad_id" ColumnName="fad_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Arbol">
+            <EntityTypeMapping TypeName="TpvSignoModel.tbl_Arbol">
+              <MappingFragment StoreEntitySet="tbl_Arbol">
+                <ScalarProperty Name="arb_estado" ColumnName="arb_estado" />
+                <ScalarProperty Name="arb_nombre" ColumnName="arb_nombre" />
+                <ScalarProperty Name="arb_codigo" ColumnName="arb_codigo" />
+                <ScalarProperty Name="arb_id" ColumnName="arb_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Nodo">
+            <EntityTypeMapping TypeName="TpvSignoModel.tbl_Nodo">
+              <MappingFragment StoreEntitySet="tbl_Nodo">
+                <ScalarProperty Name="nod_estado" ColumnName="nod_estado" />
+                <ScalarProperty Name="nod_arb_codigo" ColumnName="nod_arb_codigo" />
+                <ScalarProperty Name="nod_nombre" ColumnName="nod_nombre" />
+                <ScalarProperty Name="nod_codigo" ColumnName="nod_codigo" />
+                <ScalarProperty Name="nod_id" ColumnName="nod_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Privilegios">
+            <EntityTypeMapping TypeName="TpvSignoModel.tbl_Privilegios">
+              <MappingFragment StoreEntitySet="tbl_Privilegios">
+                <ScalarProperty Name="pri_estado" ColumnName="pri_estado" />
+                <ScalarProperty Name="pri_nod_codigo" ColumnName="pri_nod_codigo" />
+                <ScalarProperty Name="pri_rol_codigo" ColumnName="pri_rol_codigo" />
+                <ScalarProperty Name="pri_codigo" ColumnName="pri_codigo" />
+                <ScalarProperty Name="pri_id" ColumnName="pri_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Roles">
+            <EntityTypeMapping TypeName="TpvSignoModel.tbl_Roles">
+              <MappingFragment StoreEntitySet="tbl_Roles">
+                <ScalarProperty Name="rol_estado" ColumnName="rol_estado" />
+                <ScalarProperty Name="rol_descripcion" ColumnName="rol_descripcion" />
+                <ScalarProperty Name="rol_codigo" ColumnName="rol_codigo" />
+                <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Usuarios">
+            <EntityTypeMapping TypeName="TpvSignoModel.tbl_Usuarios">
+              <MappingFragment StoreEntitySet="tbl_Usuarios">
+                <ScalarProperty Name="usu_estado" ColumnName="usu_estado" />
+                <ScalarProperty Name="usu_rol_codigo" ColumnName="usu_rol_codigo" />
+                <ScalarProperty Name="usu_contrasena" ColumnName="usu_contrasena" />
+                <ScalarProperty Name="usu_nombre_usuario" ColumnName="usu_nombre_usuario" />
+                <ScalarProperty Name="usu_id" ColumnName="usu_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Productos">
+            <EntityTypeMapping TypeName="TpvSignoModel.tbl_Productos">
+              <MappingFragment StoreEntitySet="tbl_Productos">
+                <ScalarProperty Name="pro_usuario" ColumnName="pro_usuario" />
+                <ScalarProperty Name="pro_codigo_barras" ColumnName="pro_codigo_barras" />
+                <ScalarProperty Name="pro_impuesto" ColumnName="pro_impuesto" />
+                <ScalarProperty Name="pro_imagen_path" ColumnName="pro_imagen_path" />
+                <ScalarProperty Name="pro_fam_id" ColumnName="pro_fam_id" />
+                <ScalarProperty Name="pro_prv_id" ColumnName="pro_prv_id" />
+                <ScalarProperty Name="pro_estado" ColumnName="pro_estado" />
+                <ScalarProperty Name="pro_imagen" ColumnName="pro_imagen" />
+                <ScalarProperty Name="pro_precio_venta" ColumnName="pro_precio_venta" />
+                <ScalarProperty Name="pro_coste" ColumnName="pro_coste" />
+                <ScalarProperty Name="pro_stock_minimo" ColumnName="pro_stock_minimo" />
+                <ScalarProperty Name="pro_stock_actual" ColumnName="pro_stock_actual" />
+                <ScalarProperty Name="pro_descripcion" ColumnName="pro_descripcion" />
+                <ScalarProperty Name="pro_codigo" ColumnName="pro_codigo" />
+                <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Familias">
+            <EntityTypeMapping TypeName="TpvSignoModel.tbl_Familias">
+              <MappingFragment StoreEntitySet="tbl_Familias">
+                <ScalarProperty Name="fam_usuario" ColumnName="fam_usuario" />
+                <ScalarProperty Name="fam_estado" ColumnName="fam_estado" />
+                <ScalarProperty Name="fam_descripcion" ColumnName="fam_descripcion" />
+                <ScalarProperty Name="fam_id" ColumnName="fam_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Clientes">
+            <EntityTypeMapping TypeName="TpvSignoModel.tbl_Clientes">
+              <MappingFragment StoreEntitySet="tbl_Clientes">
+                <ScalarProperty Name="cli_usuario" ColumnName="cli_usuario" />
+                <ScalarProperty Name="cli_estado" ColumnName="cli_estado" />
+                <ScalarProperty Name="cli_correo" ColumnName="cli_correo" />
+                <ScalarProperty Name="cli_telefono" ColumnName="cli_telefono" />
+                <ScalarProperty Name="cli_direccion" ColumnName="cli_direccion" />
+                <ScalarProperty Name="cli_apellidos" ColumnName="cli_apellidos" />
+                <ScalarProperty Name="cli_nombres" ColumnName="cli_nombres" />
+                <ScalarProperty Name="cli_cedula_ruc" ColumnName="cli_cedula_ruc" />
+                <ScalarProperty Name="cli_id" ColumnName="cli_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Proveedores">
+            <EntityTypeMapping TypeName="TpvSignoModel.tbl_Proveedores">
+              <MappingFragment StoreEntitySet="tbl_Proveedores">
+                <ScalarProperty Name="prv_usuario" ColumnName="prv_usuario" />
+                <ScalarProperty Name="prv_estado" ColumnName="prv_estado" />
+                <ScalarProperty Name="prv_pagina_web" ColumnName="prv_pagina_web" />
+                <ScalarProperty Name="prv_telefono" ColumnName="prv_telefono" />
+                <ScalarProperty Name="prv_direccion" ColumnName="prv_direccion" />
+                <ScalarProperty Name="prv_email" ColumnName="prv_email" />
+                <ScalarProperty Name="prv_razon_social" ColumnName="prv_razon_social" />
+                <ScalarProperty Name="prv_ruc" ColumnName="prv_ruc" />
+                <ScalarProperty Name="prv_id" ColumnName="prv_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Empresa">
+            <EntityTypeMapping TypeName="TpvSignoModel.tbl_Empresa">
+              <MappingFragment StoreEntitySet="tbl_Empresa">
+                <ScalarProperty Name="emp_numero_establecimiento" ColumnName="emp_numero_establecimiento" />
+                <ScalarProperty Name="emp_contribuyente_especial" ColumnName="emp_contribuyente_especial" />
+                <ScalarProperty Name="emp_obligada_contabilidad" ColumnName="emp_obligada_contabilidad" />
+                <ScalarProperty Name="emp_nombre_comercial" ColumnName="emp_nombre_comercial" />
+                <ScalarProperty Name="emp_razon_social" ColumnName="emp_razon_social" />
+                <ScalarProperty Name="emp_ruc" ColumnName="emp_ruc" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vta_Punto_Emision">
+            <EntityTypeMapping TypeName="TpvSignoModel.vta_Punto_Emision">
+              <MappingFragment StoreEntitySet="vta_Punto_Emision">
+                <ScalarProperty Name="pem_punto_emision" ColumnName="pem_punto_emision" />
+                <ScalarProperty Name="pem_direccion_ip" ColumnName="pem_direccion_ip" />
+                <ScalarProperty Name="pem_emp_id" ColumnName="pem_emp_id" />
+                <ScalarProperty Name="pem_id" ColumnName="pem_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Punto_Emision">
+            <EntityTypeMapping TypeName="TpvSignoModel.tbl_Punto_Emision">
+              <MappingFragment StoreEntitySet="tbl_Punto_Emision">
+                <ScalarProperty Name="pem_punto_emision" ColumnName="pem_punto_emision" />
+                <ScalarProperty Name="pem_direccion_ip" ColumnName="pem_direccion_ip" />
+                <ScalarProperty Name="pem_emp_id" ColumnName="pem_emp_id" />
+                <ScalarProperty Name="pem_id" ColumnName="pem_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Factura_Cabecera">
+            <EntityTypeMapping TypeName="TpvSignoModel.tbl_Factura_Cabecera">
+              <MappingFragment StoreEntitySet="tbl_Factura_Cabecera">
+                <ScalarProperty Name="fac_usuario" ColumnName="fac_usuario" />
+                <ScalarProperty Name="fac_forma_pago_codigo" ColumnName="fac_forma_pago_codigo" />
+                <ScalarProperty Name="fac_total_impuestos" ColumnName="fac_total_impuestos" />
+                <ScalarProperty Name="fac_descuento" ColumnName="fac_descuento" />
+                <ScalarProperty Name="fac_total" ColumnName="fac_total" />
+                <ScalarProperty Name="fac_cli_apellidos" ColumnName="fac_cli_apellidos" />
+                <ScalarProperty Name="fac_cli_nombres" ColumnName="fac_cli_nombres" />
+                <ScalarProperty Name="fac_cli_cedula_ruc" ColumnName="fac_cli_cedula_ruc" />
+                <ScalarProperty Name="fac_fecha_emision" ColumnName="fac_fecha_emision" />
+                <ScalarProperty Name="fac_punto_emision" ColumnName="fac_punto_emision" />
+                <ScalarProperty Name="fac_numero_serie" ColumnName="fac_numero_serie" />
+                <ScalarProperty Name="fac_id" ColumnName="fac_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
