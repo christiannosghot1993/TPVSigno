@@ -43,7 +43,7 @@
     <ext:FormPanel
         ID="FormPanel1"
         runat="server"
-        Title="INGRESO DE CATEGORÍAS test"
+        Title="INGRESO DE CATEGORÍAS asd"
         Width="1150"
         BodyPadding="10"
         DefaultAnchor="100%">
